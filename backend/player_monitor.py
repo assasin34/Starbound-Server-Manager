@@ -1,5 +1,5 @@
 from PySide6.QtCore import QObject, Signal
-from resources.server_controller import ServerController
+from backend.server_controller import ServerController
 
 class PlayerMonitor(QObject):
     current_players = Signal(list)

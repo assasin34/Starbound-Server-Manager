@@ -1,8 +1,8 @@
-from resources.server_controller import ServerController
-from resources.resource_monitor import ResourceMonitor
-from resources.player_monitor import PlayerMonitor
-from resources.uptime_monitor import UpTimeMonitor
-from resources.settings_manager import SettingsManager
+from backend.server_controller import ServerController
+from backend.resource_monitor import ResourceMonitor
+from backend.player_monitor import PlayerMonitor
+from backend.uptime_monitor import UpTimeMonitor
+from backend.settings_manager import SettingsManager
 from PySide6 import QtWidgets
 from ui.MainWindow import Ui_MainWindow
 import sys

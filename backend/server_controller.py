@@ -1,5 +1,5 @@
 from PySide6.QtCore import QProcess, QTimer, Signal, QObject
-from resources.settings_manager import SettingsManager
+from backend.settings_manager import SettingsManager
 import urllib.request
 import json
 

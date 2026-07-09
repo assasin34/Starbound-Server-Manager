@@ -1,5 +1,5 @@
 from PySide6.QtCore import QTimer, QObject, Signal
-from resources.server_controller import ServerController
+from backend.server_controller import ServerController
 import time
 from math import floor
 
