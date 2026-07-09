@@ -2,6 +2,7 @@ import sys
 from resources.server_controller import ServerController
 from resources.resource_monitor import ResourceMonitor
 from resources.player_monitor import PlayerMonitor
+from resources.uptime_monitor import UpTimeMonitor
 from PySide6 import QtWidgets
 from ui.MainWindow import Ui_MainWindow
 
@@ -14,6 +15,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.server = ServerController()
         self.resource_monitor = ResourceMonitor(self.server)
         self.player_monitor = PlayerMonitor(self.server)
+        self.uptime_monitor = UpTimeMonitor(self.server)
         
         self.btnStart.clicked.connect(self.start_server)
         self.btnStop.clicked.connect(self.stop_server)
@@ -26,6 +28,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.resource_monitor.resources_updated.connect(self.update_resource_display)
         
         self.player_monitor.current_players.connect(self.update_player)
+        
+        self.uptime_monitor.time_changed.connect(self.update_time)
     
     
     def update_server_status(self, text):
@@ -41,9 +45,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         elif text == "Stopped":
             self.ServerStatusInfo.setText("Offline")
             self.ServerStatusInfo.setStyleSheet("color: red; font-weight: bold;")
-            self.btnStart.setEnabled(True)
-            self.listPlayers.clear()
-            self.ServerPlayersCountInfo.setText('0')  
+            self.btnStart.setEnabled(True) 
         elif text == "Stopping":
             self.ServerStatusInfo.setText("Stopping...")
             self.ServerStatusInfo.setStyleSheet("color: orange; font-weight: bold;")
@@ -72,6 +74,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listPlayers.clear()
         self.listPlayers.addItems(players)
         self.ServerPlayersCountInfo.setText(str(len(players)))
+    
+    
+    def update_time(self, time):
+        self.ServerUptimeInfo.setText(time)
+        self.ServerUptimeInfo.setStyleSheet("font-weight: bold;")
     
     
     def add_console_line(self, text):

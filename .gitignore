@@ -3,3 +3,5 @@ testing/test.py
 .vscode/launch.json
 gui-help.png
 ui/StarboundServerGUI.ui
+ARCHITECTURE.md
+ARCHITECTURE(2).md
