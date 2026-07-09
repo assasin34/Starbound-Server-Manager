@@ -1,10 +1,10 @@
-from PySide6.QtCore import QTimer, QObject, Signal
+from PySide6.QtCore import QObject, Signal
 from resources.server_controller import ServerController
 
 class PlayerMonitor(QObject):
     current_players = Signal(list)
     
-    def __init__(self, server_controller: ServerController):  #! Delete ServerController
+    def __init__(self, server_controller: ServerController):
         super().__init__()
         self.server = server_controller
         
@@ -12,6 +12,7 @@ class PlayerMonitor(QObject):
         
         self.server.output.connect(self.process_console_line)
         self.server.server_status_changed.connect(self.clear_players)
+        
         
     def process_console_line(self, line):
         if "Logged in" in line:

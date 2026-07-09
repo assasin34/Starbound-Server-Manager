@@ -1,4 +1,5 @@
 from PySide6.QtCore import QProcess, QTimer, Signal, QObject
+from resources.settings_manager import SettingsManager
 import urllib.request
 import json
 
@@ -7,10 +8,11 @@ class ServerController(QObject):
     server_status_changed = Signal(str)
     ngrok_ip_changed = Signal(str)
 
-    def __init__(self):
+    def __init__(self, settings_manager: SettingsManager):
         super().__init__()
         self.starbound_server_process = QProcess()
         self.ngrok_process = QProcess()
+        self.settings_manager = settings_manager
         self.restart_requested = False
 
         self.starbound_server_process.readyReadStandardOutput.connect(self.read_output)
@@ -23,11 +25,11 @@ class ServerController(QObject):
             return
         
         self.starbound_server_process.setWorkingDirectory(
-            r"M:\Starbound_Things\OpenStarbound-Windows-Server\win"
+            self.settings_manager.settings["server_path"]
         )
 
         self.starbound_server_process.start(
-            r"M:\Starbound_Things\OpenStarbound-Windows-Server\win\starbound_server.exe"
+            self.settings_manager.settings["server_executable_path"]
         )
         
         self.server_status_changed.emit("Starting")
@@ -37,11 +39,11 @@ class ServerController(QObject):
         arguments = ("tcp", "21025")
         
         self.ngrok_process.setWorkingDirectory(
-            r"M:\Starbound_Things\OpenStarbound-Windows-Server\win\tools"
+            self.settings_manager.settings["ngrok_path"]
         )
         
         self.ngrok_process.start(
-            r"M:\Starbound_Things\OpenStarbound-Windows-Server\win\tools\ngrok.exe", arguments=arguments
+            self.settings_manager.settings["ngrok_executable_path"], arguments=arguments
         )
               
         

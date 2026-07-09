@@ -24,6 +24,7 @@ class UpTimeMonitor(QObject):
             self.timer.stop()
             self.time_changed.emit('0h 0m 0s')
     
+    
     def update_time(self):
         elapsed = time.monotonic() - self.start_time
         hours = elapsed / 60 / 60

@@ -1,10 +1,11 @@
-import sys
 from resources.server_controller import ServerController
 from resources.resource_monitor import ResourceMonitor
 from resources.player_monitor import PlayerMonitor
 from resources.uptime_monitor import UpTimeMonitor
+from resources.settings_manager import SettingsManager
 from PySide6 import QtWidgets
 from ui.MainWindow import Ui_MainWindow
+import sys
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -12,7 +13,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         
-        self.server = ServerController()
+        self.settings_manager = SettingsManager()
+        self.server = ServerController(self.settings_manager)
         self.resource_monitor = ResourceMonitor(self.server)
         self.player_monitor = PlayerMonitor(self.server)
         self.uptime_monitor = UpTimeMonitor(self.server)
