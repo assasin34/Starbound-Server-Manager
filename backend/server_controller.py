@@ -25,11 +25,11 @@ class ServerController(QObject):
             return
         
         self.starbound_server_process.setWorkingDirectory(
-            self.settings_manager.settings["server_path"]
+            self.settings_manager.settings["server_directory"]
         )
 
         self.starbound_server_process.start(
-            self.settings_manager.settings["server_executable_path"]
+            self.settings_manager.settings["server_executable"]
         )
         
         self.server_status_changed.emit("Starting")
@@ -39,11 +39,11 @@ class ServerController(QObject):
         arguments = ("tcp", "21025")
         
         self.ngrok_process.setWorkingDirectory(
-            self.settings_manager.settings["ngrok_path"]
+            self.settings_manager.settings["ngrok_directory"]
         )
         
         self.ngrok_process.start(
-            self.settings_manager.settings["ngrok_executable_path"], arguments=arguments
+            self.settings_manager.settings["ngrok_executable"], arguments=arguments
         )
               
         
