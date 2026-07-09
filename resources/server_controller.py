@@ -6,7 +6,7 @@ import json
 class ServerController(QObject):
     output = Signal(str)
     server_status_changed = Signal(str)
-    ngrok_ip_changed = Signal(str)
+    ip_changed = Signal(str)
 
     def __init__(self, settings_manager: SettingsManager):
         super().__init__()
@@ -80,8 +80,12 @@ class ServerController(QObject):
         for line in data.splitlines():
             if "listening for incoming TCP connections" in line:
                 self.server_status_changed.emit("Online")
-                if self.ngrok_process.state() != QProcess.Running:
-                    self.start_ngrok()
+                if self.settings_manager.settings["use_ngrok"] == True:
+                    if self.ngrok_process.state() != QProcess.Running:
+                        self.start_ngrok()
+                else:
+                    public_ip = urllib.request.urlopen('https://api.ipify.org/').read().decode('utf8')
+                    self.ip_changed.emit(f"{public_ip}:21025")
             
             self.output.emit(line)
                 
@@ -92,7 +96,7 @@ class ServerController(QObject):
             self.start()
         else:
             self.server_status_changed.emit("Stopped")
-            self.ngrok_ip_changed.emit("")
+            self.ip_changed.emit("")
                 
     
     def get_pid(self):
@@ -106,8 +110,8 @@ class ServerController(QObject):
                 content = json.load(content)
                 for tunnel in content["tunnels"]:
                     if tunnel["proto"] == "tcp":
-                        self.ngrok_ip_changed.emit(tunnel["public_url"][6:])
+                        self.ip_changed.emit(tunnel["public_url"][6:])
             except urllib.error.URLError:
-                self.ngrok_ip_changed.emit("Couldn't Retrieve")
+                self.ip_changed.emit("Couldn't Retrieve")
         QTimer.singleShot(3000, retrieve)
     

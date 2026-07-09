@@ -5,5 +5,5 @@
     "ngrok_executable_path": "M:\\Starbound_Things\\OpenStarbound-Windows-Server\\win\\tools\\ngrok.exe",
     "universe_path": "...",
     "assets_path": "...",
-    "auto_start_ngrok": true
+    "use_ngrok": true
 }

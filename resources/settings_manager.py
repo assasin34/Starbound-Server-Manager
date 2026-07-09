@@ -13,7 +13,7 @@ class SettingsManager(QObject):
     "ngrok_executable_path": "M:\\Starbound_Things\\OpenStarbound-Windows-Server\\win\\tools\\ngrok.exe",
     "universe_path": "...",
     "assets_path": "...",
-    "auto_start_ngrok": True
+    "use_ngrok": True
 }
     
     def __init__(self):

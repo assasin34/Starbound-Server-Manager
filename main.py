@@ -25,7 +25,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.server.output.connect(self.add_console_line)
         self.server.server_status_changed.connect(self.update_server_status)
-        self.server.ngrok_ip_changed.connect(self.update_ip)
+        self.server.ip_changed.connect(self.update_ip)
         
         self.resource_monitor.resources_updated.connect(self.update_resource_display)
         
