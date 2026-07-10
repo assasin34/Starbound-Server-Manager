@@ -1,11 +1,11 @@
 # OpenStarbound Server Manager
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/assasin34/OpenStarbound-Server-Manager)
 
-A graphical server manager for Starbound, built with Python and PySide6. This tool provides an easy-to-use interface for managing your Starbound dedicated server, monitoring its performance, and viewing connected players.
+A graphical server manager for OpenStarbound, built with Python and PySide6. This tool provides an easy-to-use interface for managing your OpenStarbound dedicated server, monitoring its performance, and viewing connected players.
 
 ## Features
 
-*   **Server Control:** Easily Start, Stop, and Restart your Starbound server with dedicated buttons.
+*   **Server Control:** Easily Start, Stop, and Restart your OpenStarbound server with dedicated buttons.
 *   **Live Console:** View the raw server console output in real-time.
 *   **Player Monitoring:** See a list of currently connected players and a live player count.
 *   **Resource Tracking:** Monitor CPU and RAM usage for both the server process and your total system.
@@ -17,7 +17,7 @@ A graphical server manager for Starbound, built with Python and PySide6. This to
 
 ### Prerequisites
 *   Python 3.x
-*   A local copy of the Starbound dedicated server.
+*   A local copy of the OpenStarbound dedicated server.
 
 ### Installation
 
