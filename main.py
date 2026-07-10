@@ -1,11 +1,14 @@
+from PySide6 import QtWidgets
+import sys
+
 from backend.server_controller import ServerController
 from backend.resource_monitor import ResourceMonitor
 from backend.player_monitor import PlayerMonitor
 from backend.uptime_monitor import UpTimeMonitor
 from backend.settings_manager import SettingsManager
-from PySide6 import QtWidgets
+
 from ui.MainWindow import Ui_MainWindow
-import sys
+from dialogs.settings_dialog import SettingsDialog
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -22,6 +25,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnStart.clicked.connect(self.start_server)
         self.btnStop.clicked.connect(self.stop_server)
         self.btnRestart.clicked.connect(self.restart_server)
+        self.btnSettings.clicked.connect(self.open_settings)
         
         self.server.output.connect(self.add_console_line)
         self.server.server_status_changed.connect(self.update_server_status)
@@ -101,6 +105,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.server.restart()
 
 
+    def open_settings(self):
+        dialog = SettingsDialog(self.settings_manager)
+        dialog.exec()
+        
 app = QtWidgets.QApplication(sys.argv)
 
 window = MainWindow()
