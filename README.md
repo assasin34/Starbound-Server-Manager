@@ -1,8 +1,8 @@
 # OpenStarbound Server Manager
+[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/assasin34/OpenStarbound-Server-Manager)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![License](https://img.shields.io/github/license/assasin34/OpenStarbound-Server-Manager)
 ![Platform](https://img.shields.io/badge/Platform-Windows-blue)
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/assasin34/OpenStarbound-Server-Manager)
 
 A graphical server manager for OpenStarbound, built with Python and PySide6. This tool provides an easy-to-use interface for managing your OpenStarbound dedicated server, monitoring its performance, and viewing connected players.
 
