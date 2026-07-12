@@ -61,10 +61,10 @@ Alternatively, you can manually edit the `settings.json` file:
 
 ```json
 {
-    "server_executable": "C:\\path\\to\\your\\starbound_server.exe",
-    "server_directory": "C:\\path\\to\\your\\server_folder",
-    "ngrok_executable": "C:\\path\\to\\your\\ngrok.exe",
-    "ngrok_directory": "C:\\path\\to\\your\\ngrok_folder",
+    "server_executable": "C:/path/to/your/starbound_server.exe",
+    "server_directory": "C:/path/to/your/server_folder",
+    "ngrok_executable": "C:/path/to/your/ngrok.exe",
+    "ngrok_directory": "C:/path/to/your/ngrok_folder",
     "universe_path": "...",
     "assets_path": "...",
     "use_ngrok": true

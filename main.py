@@ -36,6 +36,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.player_monitor.current_players.connect(self.update_player)
         
         self.uptime_monitor.time_changed.connect(self.update_time)
+        
+        self.settings_manager.open_settings.connect(self.open_settings)
     
     
     def start_server(self):

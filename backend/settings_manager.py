@@ -1,8 +1,9 @@
-from PySide6.QtCore import QObject
+from PySide6.QtCore import QObject, QTimer, Signal
 import json
 import os
 
 class SettingsManager(QObject):
+    open_settings = Signal()
     
     SETTINGS_FILE = "settings.json"
     DEFAULT_SETTINGS = {
@@ -28,7 +29,10 @@ class SettingsManager(QObject):
         with open(self.SETTINGS_FILE, "w") as file:
                 json.dump(self.DEFAULT_SETTINGS, file, indent=4)
                 self.settings = self.DEFAULT_SETTINGS.copy()
-               
+        def open_settings():
+            self.open_settings.emit()
+        QTimer().singleShot(1000, open_settings)
+    
     
     def load_settings(self):
         with open(self.SETTINGS_FILE, "r") as file:

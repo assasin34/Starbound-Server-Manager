@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QMessageBox
+from PySide6.QtWidgets import QDialog, QMessageBox, QFileDialog
 from PySide6.QtCore import Signal
 from ui.SettingsWindow import Ui_Dialog
 from backend.settings_manager import SettingsManager
@@ -22,9 +22,25 @@ class SettingsDialog(QDialog, Ui_Dialog):
         
         self.disable_ngrok_settings(self.checkBoxUseNgrok.isChecked())
         
+        self.btnServerExecutableBrowse.clicked.connect(lambda: self.browse_file(self.lineEditServerExecutable))
+        self.btnServerExecutableFolderBrowse.clicked.connect(lambda: self.browse_folder(self.lineEditServerExecutableFolder))
+        self.btnUniverseFolderBrowse.clicked.connect(lambda: self.browse_folder(self.lineEditUniverseFolder))
+        self.btnNgrokExecutableBrowse.clicked.connect(lambda: self.browse_file(self.lineEditNgrokExecutable))
+        self.btnNgrokExecutableFolderBrowse.clicked.connect(lambda: self.browse_folder(self.lineEditNgrokExecutableFolder))
+        
         self.checkBoxUseNgrok.toggled.connect(self.disable_ngrok_settings)
         self.buttonBox.accepted.connect(self.accept_changes)
+    
+    
+    def browse_file(self, setting_name):
+        path = QFileDialog.getOpenFileName()[0]
+        setting_name.setText(path)
         
+        
+    def browse_folder(self, setting_name):
+        path = QFileDialog.getExistingDirectory()
+        setting_name.setText(path) 
+    
         
     def accept_changes(self):
         self.settings["server_executable"] = self.lineEditServerExecutable.text()
