@@ -1,4 +1,5 @@
 from PySide6 import QtWidgets
+from PySide6.QtWidgets import QMessageBox
 import sys
 
 from backend.server_controller import ServerController
@@ -11,8 +12,6 @@ from backend.config_manager import ConfigManager
 from ui.MainWindow import Ui_MainWindow
 from dialogs.settings_dialog import SettingsDialog
 from dialogs.config_dialog import ConfigDialog
-
-from PySide6.QtWidgets import QMessageBox
 
 import qdarktheme
 
@@ -132,11 +131,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         )
       
 def main():
+    try:
+        import pyi_splash  # type: ignore
+    except ImportError:
+        pyi_splash = None
+        
     app = QtWidgets.QApplication(sys.argv)
     # qdarktheme.setup_theme() #TODO Dark Theme
 
     window = MainWindow()
     window.show()
+    
+    if pyi_splash:
+        pyi_splash.close()
+        
     app.exec()
     
     
